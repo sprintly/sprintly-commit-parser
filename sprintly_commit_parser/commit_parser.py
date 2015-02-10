@@ -63,7 +63,7 @@ class CommitParser(object):
                   'subtracts': 'minus_hours'}
 
     def __call__(self, message):
-        # TODO(justinlilly): Consider using a defaultdict(list) here, rather
+        # TODO(justinabrahms): Consider using a defaultdict(list) here, rather
         # than a list of dicts.
         commands = []
         for p in CommitParser._parsers:
