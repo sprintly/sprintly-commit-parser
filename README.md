@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sprintly/sprintly-commit-parser.svg?branch=master)](https://travis-ci.org/sprintly/sprintly-commit-parser)
+
 # Sprintly Commit Parser
 
 Parse commits for Sprintly commands.
