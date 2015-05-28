@@ -19,14 +19,7 @@ class CommitParser(object):
 
     _command_re = re.compile(_ticket_command, re.I | re.UNICODE)
     _ticket_re = re.compile(TICKET_PREFIX + '([0-9]+)', re.I | re.UNICODE)
-
-    _hour_words = ['added', 'knocked off', 'killed', 'completed', 'finished',
-        'subtract', 'subtracted', 'subtracts', 'adds', 'add']
-    _hour_command = '(%s) ([0-9]+(\.[0-9]+)?) (hours|hrs|hr|hour)' % \
-        '|'.join(_hour_words)
-    _hours_re = re.compile(_hour_command, re.I | re.UNICODE)
-
-    _parsers = ['commands', 'hours']
+    _parsers = ['commands']
     _item_cmds = {'close': 'close_ticket',
                   'closed': 'close_ticket',
                   'closes': 'close_ticket',
@@ -51,17 +44,6 @@ class CommitParser(object):
                   'starts': 'reference_ticket',
                   'see': 'reference_ticket'}
 
-    _hour_cmds = {'added': 'add_hours',
-                  'adds': 'add_hours',
-                  'add': 'add_hours',
-                  'knocked off': 'minus_hours',
-                  'killed': 'minus_hours',
-                  'completed': 'minus_hours',
-                  'finished': 'minus_hours',
-                  'subtract': 'minus_hours',
-                  'subtracted': 'minus_hours',
-                  'subtracts': 'minus_hours'}
-
     def __call__(self, message):
         # TODO(justinabrahms): Consider using a defaultdict(list) here, rather
         # than a list of dicts.
@@ -85,18 +67,6 @@ class CommitParser(object):
                 tickets = items_mentioned(tkts)
                 for t in tickets:
                     commands.append({command: int(t)})
-            except KeyError:
-                pass
-
-        return commands
-
-    def _parse_hours(self, message):
-        hrs_groups = CommitParser._hours_re.findall(message)
-        commands = []
-        for cmd, hrs, blah, suffix in hrs_groups:
-            try:
-                command = {CommitParser._hour_cmds[cmd.lower()]: float(hrs)}
-                commands.append(command)
             except KeyError:
                 pass
 
