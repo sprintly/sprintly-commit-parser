@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sprintly_commit_parser',
-    version='0.1.0',
+    version='0.2.0',
     description='Utility for parsing commits for Sprintly commands.',
     long_description='',
     keywords='sprintly, commit, parser',
