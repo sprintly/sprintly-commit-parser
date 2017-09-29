@@ -22,12 +22,9 @@ def items_mentioned(string):
         else:
             ticket_id = int(x)
 
-        print 'x = {0} -> ticket_id = {1}'.format(x, ticket_id)
-
         items.append(ticket_id)
 
     return items
-#    return [int(x) for x in TICKET_RE.findall(string)]
 
 
 class CommitParser(object):
@@ -76,8 +73,6 @@ class CommitParser(object):
 
     def _parse_commands(self, message):
         cmd_groups = CommitParser._command_re.findall(message)
-
-        print cmd_groups
 
         commands = []
 
